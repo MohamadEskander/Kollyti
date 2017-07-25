@@ -1,0 +1,112 @@
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/rect"
+    >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/news_ID"
+                android:layout_marginLeft="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img1" />
+
+            <com.example.isco.kolite.customfonts.MyTextView
+                android:id="@+id/new_row_ID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="isco"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="6dp"
+                android:textSize="18dp"
+                android:textColor="@color/listtext"
+                android:lineSpacingExtra="2dp"
+                />
+                      </LinearLayout>
+            <com.example.isco.kolite.customfonts.MyTextView
+                android:id="@+id/new_row_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="websites as well as FTP, SFTP, WebDav, SMB, and CIFS support. It also comes with root access, two panel navigation, and it’s all wrapped up in a swath of Material Design. Cabinet Beta is pretty good, but at least for n"
+                android:textSize="15dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/listsub1"
+                android:lineSpacingExtra="2dp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="3dp"
+                android:id="@+id/new_row_image"
+                android:layout_gravity="center"
+                android:src="@android:drawable/ic_menu_gallery"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                android:layout_weight="0.60"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginTop="3dp"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <com.like.LikeButton
+                        android:layout_alignParentLeft="true"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="60dp"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:background="?android:attr/selectableItemBackground"
+                        app:icon_type="Heart"
+                        android:layout_gravity="center"
+                        android:id="@+id/NewLike1"
+                        app:circle_start_color="@color/colorPrimary"
+                        app:like_drawable="@drawable/heart_on"
+                        app:unlike_drawable="@drawable/heart_off"
+                        app:dots_primary_color="@color/colorAccent"
+                        app:dots_secondary_color="@color/colorPrimary"
+                        app:circle_end_color="@color/colorAccent"
+                        app:icon_size="24dp"
+                        app:liked="false"
+                        app:anim_scale_factor="2" />
+                    <ImageButton
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/NewComment"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:layout_toRightOf="@+id/NewLike1"
+                        android:layout_gravity="center"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:src="@drawable/ic_mode_comment_white_24dp"
+                        />
+                </RelativeLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>

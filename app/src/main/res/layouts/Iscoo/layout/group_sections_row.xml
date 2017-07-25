@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/group_select_sec"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/sec_img"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_weight=".1"
+            android:src="@drawable/img1"/>
+
+        <com.example.isco.kolite.customfonts.MyTextView
+            android:id="@+id/group_name_sec"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="section1"
+            android:textSize="14dp"
+            android:layout_gravity="center"
+            android:textColor="@color/listtext"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:layout_weight=".8"
+            />
+
+                <com.rey.material.widget.CheckBox
+                    style="@style/Material.Drawable.CheckBox"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:id="@+id/group_true_sec"
+                    android:enabled="false"
+                    android:layout_weight=".1"/>
+
+
+
+        </LinearLayout>
+
+</LinearLayout>
