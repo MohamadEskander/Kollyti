@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.example.isco.kolite.model.News;
+import com.example.isco.kolite.utils.ImageUtils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,46 +27,43 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import id.zelory.compressor.Compressor;
+
 public class Isco_Add_News extends AppCompatActivity {
-    EditText txtOfnew;
-    Button selectImage;
-    ImageView img;
-    Button pushPost;
-    DatabaseReference mDatabase ;
-    StorageReference storageReference;
-    Uri uri;
-    Uri fileUri;
-    int var  = 1;
-    int var2 = 2;
-    ProgressDialog pdialog ;
+    private EditText txtOfnew;
+    private Button selectImage;
+    private ImageView img;
+    private Button pushPost;
+    private DatabaseReference mDatabase ;
+    private StorageReference storageReference;
+    private int var  = 1;
+    private int var2 = 2;
+    private ProgressDialog pdialog ;
     private FirebaseAuth auth;
     private String uuid;
     private String Group_key;
     private ValueEventListener singlevalue;
+    private Uri copressedImg;
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == var && resultCode == RESULT_OK) {
-            uri = data.getData();
-            img.setImageURI(uri);
-
+            Uri uri = data.getData();
+             copressedImg = ImageUtils.getImageFileCompressedUri(uri , 600 , this);
+            img.setImageURI(copressedImg);
         } else if (requestCode == var2 && resultCode == RESULT_OK) {
 
         }
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_isco__add__news);
+        init();
         storageReference = FirebaseStorage.getInstance().getReference();
-        pushPost = (Button) findViewById(R.id.pushbtn);
-        txtOfnew = (EditText) findViewById(R.id.newtxt);
-        selectImage = (Button) findViewById(R.id.btnnewimg);
-        img = (ImageView) findViewById(R.id.newimgpath);
-
         auth = FirebaseAuth.getInstance();
         uuid = auth.getCurrentUser().getUid();
 
@@ -78,14 +76,15 @@ public class Isco_Add_News extends AppCompatActivity {
             mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts").child(Group_key);
         }
 
+
         pushPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StorageReference ss = storageReference.child("News_Images").child(uri.getLastPathSegment());
+                StorageReference ss = storageReference.child("News_Images").child(copressedImg.getLastPathSegment());
                 pdialog =   new ProgressDialog(Isco_Add_News.this);
                 pdialog.setMessage("uploading");
                 pdialog.show();
-                ss.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                ss.putFile(copressedImg).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Uri downloadlink = taskSnapshot.getDownloadUrl();
@@ -156,5 +155,13 @@ public class Isco_Add_News extends AppCompatActivity {
         txtOfnew.setText("");
         img.setImageURI(null);
 
+    }
+
+    public void init()
+    {
+        pushPost = (Button) findViewById(R.id.pushbtn);
+        txtOfnew = (EditText) findViewById(R.id.newtxt);
+        selectImage = (Button) findViewById(R.id.btnnewimg);
+        img = (ImageView) findViewById(R.id.newimgpath);
     }
 }
