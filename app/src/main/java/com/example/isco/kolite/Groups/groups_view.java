@@ -58,6 +58,7 @@ public class groups_view extends AppCompatActivity {
     private Query query;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -87,7 +87,6 @@ public class ViewAllGroups extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.v("startisco1" , "true");
         arrGroupList = new ArrayList<>();
         adapter = new GroupsViewAdapter(getContext(), arrGroupList);
         mListView.setAdapter(adapter);

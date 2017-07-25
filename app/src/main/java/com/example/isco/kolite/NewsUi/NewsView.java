@@ -121,7 +121,6 @@ public class NewsView extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.v("startisco" , "start");
         RefreshRecycler();
     }
 

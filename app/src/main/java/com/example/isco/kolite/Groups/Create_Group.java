@@ -131,7 +131,6 @@ public class Create_Group extends AppCompatActivity {
                         GroupModel gModel = new GroupModel(group_name.getText().toString() , downloadlink.toString());
                         DatabaseReference newDb = mDatabaseGroup.push();
                         newDb.setValue(gModel);
-                        Log.v("hoho" , StudentsID.size()+"" );
                         for (int x = 0 ; x < StudentsID.size() ; x++)
                         {
                             newDb.child("gUsers").setValue(StudentsID);

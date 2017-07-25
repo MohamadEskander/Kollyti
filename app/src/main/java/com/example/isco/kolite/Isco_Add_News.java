@@ -143,7 +143,6 @@ public class Isco_Add_News extends AppCompatActivity {
     public void nTimestamp(Object object)
     {
         object = ServerValue.TIMESTAMP;
-        Log.v("idco" , object.toString());
     }
 
 //    @Override

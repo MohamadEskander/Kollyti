@@ -113,7 +113,6 @@ public class News_Comment extends AppCompatActivity {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                             if (databaseError != null) {
-                                Log.v("idco", "Data could not be saved " + databaseError.getMessage());
                             } else {
                                 flag = 0;
                                 ff.child(currentKey).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -183,10 +182,6 @@ public class News_Comment extends AppCompatActivity {
                                 }
                             });
                         }
-//                        else {
-//                            Log.v("a7aa", data.getKey());
-//                            flag = 1;
-//                             }
 
                     }
 
