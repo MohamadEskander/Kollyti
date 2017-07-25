@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.example.isco.kolite.Isco_Add_News;
 import com.example.isco.kolite.NewsUi.News_Comment;
 import com.example.isco.kolite.R;
+import com.example.isco.kolite.utils.Constants;
 import com.example.isco.kolite.model.GroupModel;
 import com.example.isco.kolite.model.News;
 import com.example.isco.kolite.model.News2view;
@@ -82,9 +83,8 @@ public class Create_Group extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create__group);
         // database references firebase
-
-        mDatabaseGroup = FirebaseDatabase.getInstance().getReference().child("Group");
-        mDatabaseSection = FirebaseDatabase.getInstance().getReference().child("Class");
+        mDatabaseGroup = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL_GROUP);
+        mDatabaseSection = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL_CLASS);
         storageReference = FirebaseStorage.getInstance().getReference();
 
         StudentsID = new HashMap<String, String>();

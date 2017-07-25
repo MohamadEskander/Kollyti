@@ -22,6 +22,7 @@ import com.example.isco.kolite.NewsUi.News_Comment;
 import com.example.isco.kolite.R;
 import com.example.isco.kolite.model.News2view;
 import com.example.isco.kolite.model.newviewmodel;
+import com.example.isco.kolite.utils.Constants;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -66,11 +67,11 @@ public class groups_view extends AppCompatActivity {
 
         Group_Key_m = getIntent().getBundleExtra("Group_Home").getString("Group_Key");
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts").child(Group_Key_m);
+        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL_POSTS).child(Group_Key_m);
          query = mDatabase.orderByChild("mDate");
-        mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("PostLikes").child(Group_Key_m);
-        mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
-        mDatabaseComment  = FirebaseDatabase.getInstance().getReference().child("PostsComment").child(Group_Key_m);
+        mDatabaseLike = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_POSTSLIKES).child(Group_Key_m);
+        mDatabaseUsers = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL_USERS);
+        mDatabaseComment  = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL_POSTSCOMMENT).child(Group_Key_m);
 
         mDatabase.keepSynced(true);
         mDatabaseLike.keepSynced(true);

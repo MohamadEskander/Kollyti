@@ -23,6 +23,7 @@ import com.example.isco.kolite.model.Comment;
 import com.example.isco.kolite.model.News2view;
 import com.example.isco.kolite.model.News_Comment_Model;
 import com.example.isco.kolite.model.newviewmodel;
+import com.example.isco.kolite.utils.Constants;
 import com.facebook.share.internal.LikeButton;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -78,15 +79,15 @@ public class News_Comment extends AppCompatActivity {
 
         News_Key_Comment_Bundel = getIntent().getBundleExtra("News_Home");
         Posts_Key_Comment_Bundel = getIntent().getBundleExtra("Posts_Home");
-        mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
+        mDatabaseUsers = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL_USERS);
         if (News_Key_Comment_Bundel != null) {
             News_Key_Comment_String = News_Key_Comment_Bundel.getString("News_Key");
-            mDatabaseComment = FirebaseDatabase.getInstance().getReference().child("Comment");
+            mDatabaseComment = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL_COMMENT);
         }
         if (Posts_Key_Comment_Bundel != null) {
             News_Key_Comment_String = Posts_Key_Comment_Bundel.getString("Posts_Key");
             String x = Posts_Key_Comment_Bundel.getString("Group_Key");
-            mDatabaseComment = FirebaseDatabase.getInstance().getReference().child("PostsComment").child(x);
+            mDatabaseComment = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL_POSTSCOMMENT).child(x);
         }
 
 

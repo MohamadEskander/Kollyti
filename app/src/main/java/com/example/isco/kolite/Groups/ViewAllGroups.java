@@ -23,6 +23,7 @@ import com.example.isco.kolite.adapter.GroupsAdapter;
 import com.example.isco.kolite.adapter.postAdapter;
 import com.example.isco.kolite.model.groupsviewmodel;
 import com.example.isco.kolite.model.newviewmodel;
+import com.example.isco.kolite.utils.Constants;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -66,8 +67,8 @@ public class ViewAllGroups extends Fragment {
         auth = FirebaseAuth.getInstance();
         uuid = auth.getCurrentUser().getUid();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Group");
-        mDatabaseGUsers = FirebaseDatabase.getInstance().getReference().child("Group");
+        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL_GROUP);
+        mDatabaseGUsers = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL_GROUP);
         mDatabase.keepSynced(true);
         mDatabaseGUsers.keepSynced(true);
 

@@ -31,6 +31,7 @@ import com.example.isco.kolite.MainActivity;
 import com.example.isco.kolite.R;
 import com.example.isco.kolite.model.News2view;
 //import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.example.isco.kolite.utils.Constants;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -74,13 +75,13 @@ public class NewsView extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_news_view,container,false);
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("news");
+        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL_news);
         BYtimestamp = mDatabase.orderByChild("mDate");
         news_user_img = (ImageView) view.findViewById(R.id.news_user_img);
 
-        mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
-        mDatabaseLike  = FirebaseDatabase.getInstance().getReference().child("Likes");
-        mDatabaseComment  = FirebaseDatabase.getInstance().getReference().child("Comment");
+        mDatabaseUsers = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL_USERS);
+        mDatabaseLike  = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL_LIKES);
+        mDatabaseComment  = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL_COMMENT);
 
         mDatabase.keepSynced(true);
         BYtimestamp.keepSynced(true);

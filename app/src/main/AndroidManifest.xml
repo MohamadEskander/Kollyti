@@ -68,7 +68,6 @@
         <activity android:name=".NewsUi.News_Comment" />
         <activity android:name=".Groups.Create_Group" />
         <activity android:name=".Groups.groups_view" />
-        <activity android:name=".Groups.create_post" />
         <activity android:name=".Groups.ViewAllGroups"/>
 
         <!--   chaaaaaat-->
