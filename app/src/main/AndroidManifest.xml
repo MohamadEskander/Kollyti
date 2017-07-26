@@ -69,8 +69,14 @@
         <activity android:name=".Groups.Create_Group" />
         <activity android:name=".Groups.groups_view" />
         <activity android:name=".Groups.ViewAllGroups"/>
+        <activity
+            android:name=".ImageActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_image"
+            android:theme="@style/FullscreenTheme">
 
-        <!--   chaaaaaat-->
+        </activity>
+
 
     </application>
 

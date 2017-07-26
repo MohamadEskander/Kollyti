@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.isco.kolite.ImageActivity;
 import com.example.isco.kolite.Isco_Add_News;
 import com.example.isco.kolite.adapter.postAdapter;
 import com.example.isco.kolite.NewsUi.NewsView;
@@ -132,6 +133,7 @@ public class groups_view extends AppCompatActivity {
             //mDatabase.getRef(position).getKey();
             newviewmodel NewItem = newItemList.get(position);
             final String New_Key = NewItem.getNewId();
+            final String linkOfImg = NewItem.getuNewimg();
             viewHolder.setPost(NewItem.getuINewPost());
             viewHolder.setay(groups_view.this, NewItem.getuNewimg());
             viewHolder.setImage(groups_view.this,NewItem.getuImg());
@@ -201,6 +203,17 @@ public class groups_view extends AppCompatActivity {
                     b.putString("Group_Key" , Group_Key_m);
                     intent.putExtra("Posts_Home" , b );
                     startActivity(intent);
+                }
+            });
+
+            viewHolder.postImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent i = new Intent(groups_view.this, ImageActivity.class);
+                    i.putExtra(ImageActivity.EXTRA_IMAGE_LINK , linkOfImg);
+                    startActivity(i);
+
                 }
             });
         }

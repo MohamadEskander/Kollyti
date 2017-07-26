@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.isco.kolite.ImageActivity;
 import com.example.isco.kolite.adapter.postAdapter;
 import com.example.isco.kolite.adapter.postAdapter;
 import com.example.isco.kolite.model.News;
@@ -221,6 +222,7 @@ public class NewsView extends Fragment {
              //mDatabase.getRef(position).getKey();
             newviewmodel NewItem = newItemList.get(position);
             final String New_Key = NewItem.getNewId();
+            final String linkOfImg = NewItem.getuNewimg();
             viewHolder.setPost(NewItem.getuINewPost());
             viewHolder.setay(getContext(), NewItem.getuNewimg());
             viewHolder.setImage(getContext(),NewItem.getuImg());
@@ -291,6 +293,16 @@ public class NewsView extends Fragment {
                         startActivity(intent);
                     }
                 });
+            viewHolder.postImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent i = new Intent(getActivity(), ImageActivity.class);
+                    i.putExtra(ImageActivity.EXTRA_IMAGE_LINK , linkOfImg);
+                    startActivity(i);
+
+                }
+            });
         }
 
         @Override

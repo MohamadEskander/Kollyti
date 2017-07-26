@@ -21,13 +21,14 @@ public class postAdapter extends RecyclerView.ViewHolder {
         public View mView;
         public ImageButton NewComment;
         public  LikeButton NewLike1;
+        public ImageView postImg;
 
         public postAdapter(View itemView){
             super(itemView);
             mView = itemView;
             NewComment = (ImageButton) mView.findViewById(R.id.NewComment);
             NewLike1 = (LikeButton) mView.findViewById(R.id.NewLike1);
-
+            postImg = (ImageView) mView.findViewById(R.id.new_row_image);
         }
         public void setPost(String post) {
             TextView new_row_post = (TextView) mView.findViewById(R.id.new_row_post);

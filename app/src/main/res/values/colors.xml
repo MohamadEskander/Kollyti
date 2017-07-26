@@ -19,6 +19,7 @@
     <color name="colordevider">#64dad8d8</color>
     <color name="colorblue">#4c71f5</color>
     <color name="colorSub">#b0afaf</color>
+    <color name="black_overlay">#000</color>
 
 
     <color name="coloraction">#528de0</color>
