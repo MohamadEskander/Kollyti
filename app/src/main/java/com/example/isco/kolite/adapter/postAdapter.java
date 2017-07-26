@@ -31,7 +31,13 @@ public class postAdapter extends RecyclerView.ViewHolder {
         }
         public void setPost(String post) {
             TextView new_row_post = (TextView) mView.findViewById(R.id.new_row_post);
-            new_row_post.setText(post);
+            if (post.equals(" "))
+            {
+                new_row_post.setVisibility(View.GONE);
+            }
+            else
+                new_row_post.setText(post);
+
         }
         public void setay(final Context context, final String image){
             final ImageView new_row_image = (ImageView) mView.findViewById(R.id.new_row_image);

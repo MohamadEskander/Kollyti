@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.isco.kolite.model.News;
 import com.example.isco.kolite.utils.ImageUtils;
@@ -30,8 +32,10 @@ import com.google.firebase.storage.UploadTask;
 import id.zelory.compressor.Compressor;
 
 public class Isco_Add_News extends AppCompatActivity {
+
     private EditText txtOfnew;
-    private Button selectImage;
+    private ImageButton selectImage;
+    private TextView cancelPost;
     private ImageView img;
     private Button pushPost;
     private DatabaseReference mDatabase ;
@@ -44,7 +48,6 @@ public class Isco_Add_News extends AppCompatActivity {
     private String Group_key;
     private ValueEventListener singlevalue;
     private Uri copressedImg;
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -87,9 +90,16 @@ public class Isco_Add_News extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Uri downloadlink = taskSnapshot.getDownloadUrl();
-                            News nn = new News(txtOfnew.getText().toString().trim(), downloadlink.toString(), uuid, ServerValue.TIMESTAMP);
                             final String Key = mDatabase.push().getKey();
-                            mDatabase.child(Key).setValue(nn);
+                            if(txtOfnew.getText().toString().trim().equals("")) {
+                                News nn = new News(" ", downloadlink.toString(), uuid, ServerValue.TIMESTAMP);
+                                mDatabase.child(Key).setValue(nn);
+                            }
+                            else
+                            {
+                                News nn = new News(txtOfnew.getText().toString().trim(), downloadlink.toString(), uuid, ServerValue.TIMESTAMP);
+                                mDatabase.child(Key).setValue(nn);
+                            }
                             hideDialog();
                             singlevalue = new ValueEventListener() {
                                 @Override
@@ -105,13 +115,14 @@ public class Isco_Add_News extends AppCompatActivity {
                             };
                             mDatabase.child(Key).addListenerForSingleValueEvent(singlevalue);
                             reset();
-                            Toast.makeText(getApplicationContext(), "push sucess", Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(Isco_Add_News.this , MainActivity.class));
+                            finish();
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            pdialog.dismiss();
+                            hideDialog();
                             Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
 
                         }
@@ -139,7 +150,8 @@ public class Isco_Add_News extends AppCompatActivity {
                     };
                     mDatabase.child(Key).addListenerForSingleValueEvent(singlevalue);
                     reset();
-                    Toast.makeText(getApplicationContext(), "push sucess", Toast.LENGTH_SHORT).show();
+                    //startActivity(new Intent(Isco_Add_News.this , MainActivity.class));
+                    finish();
                 }
                 else
                     Toast.makeText(getApplicationContext(), "write anything or chose image", Toast.LENGTH_SHORT).show();
@@ -154,6 +166,13 @@ public class Isco_Add_News extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent , var);
+            }
+        });
+
+        cancelPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -186,7 +205,8 @@ public class Isco_Add_News extends AppCompatActivity {
     {
         pushPost = (Button) findViewById(R.id.pushbtn);
         txtOfnew = (EditText) findViewById(R.id.newtxt);
-        selectImage = (Button) findViewById(R.id.btnnewimg);
+        selectImage = (ImageButton) findViewById(R.id.btnnewimg);
+        cancelPost = (TextView) findViewById(R.id.cancelpost);
         img = (ImageView) findViewById(R.id.newimgpath);
     }
 

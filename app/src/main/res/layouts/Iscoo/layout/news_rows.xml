@@ -46,16 +46,16 @@
                 android:padding="10dp"
                 android:text="websites as well as FTP, SFTP, WebDav, SMB, and CIFS support. It also comes with root access, two panel navigation, and it’s all wrapped up in a swath of Material Design. Cabinet Beta is pretty good, but at least for n"
                 android:textSize="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/listsub1"
                 android:lineSpacingExtra="2dp"
                 android:maxLines="4"
                 />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#123656"
-                android:text="See More..."/>
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textColor="#123656"-->
+                <!--android:text="See More..."/>-->
 
             <ImageView
                 android:layout_width="match_parent"
