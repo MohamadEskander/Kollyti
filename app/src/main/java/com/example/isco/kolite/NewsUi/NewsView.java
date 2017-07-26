@@ -156,7 +156,6 @@ public class NewsView extends Fragment {
                                                 arrNewsList.add(NewsModel);
                                                 adapter.notifyItemInserted(arrNewsList.size() - 1);
                                                 mmNewsList.scrollToPosition(adapter.getItemCount() - 1);
-
                                                 Isfirst = false;
                                             }
 
@@ -211,7 +210,7 @@ public class NewsView extends Fragment {
 
         @Override
         public postAdapter onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.news_rows, null);
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.news_rows, null , false);
             postAdapter viewHolder = new postAdapter(view);
             return viewHolder;
         }

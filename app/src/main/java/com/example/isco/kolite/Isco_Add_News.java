@@ -80,43 +80,72 @@ public class Isco_Add_News extends AppCompatActivity {
         pushPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StorageReference ss = storageReference.child("News_Images").child(copressedImg.getLastPathSegment());
-                pdialog =   new ProgressDialog(Isco_Add_News.this);
-                pdialog.setMessage("uploading");
-                pdialog.show();
-                ss.putFile(copressedImg).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Uri downloadlink = taskSnapshot.getDownloadUrl();
-                        News nn = new News(txtOfnew.getText().toString().trim() , downloadlink.toString() , uuid , ServerValue.TIMESTAMP);
-                        final String Key = mDatabase.push().getKey();
-                        mDatabase.child(Key).setValue(nn);
-                        pdialog.dismiss();
-                        singlevalue = new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                Long ss = dataSnapshot.child("mDate").getValue(long.class);
-                                mDatabase.child(Key).child("mDate").setValue(-1*ss);
-                            }
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                if (copressedImg != null) {
+                    showDialog();
+                    StorageReference ss = storageReference.child("News_Images").child(copressedImg.getLastPathSegment());
+                    ss.putFile(copressedImg).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Uri downloadlink = taskSnapshot.getDownloadUrl();
+                            News nn = new News(txtOfnew.getText().toString().trim(), downloadlink.toString(), uuid, ServerValue.TIMESTAMP);
+                            final String Key = mDatabase.push().getKey();
+                            mDatabase.child(Key).setValue(nn);
+                            hideDialog();
+                            singlevalue = new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    Long ss = dataSnapshot.child("mDate").getValue(long.class);
+                                    mDatabase.child(Key).child("mDate").setValue(-1 * ss);
+                                }
 
-                            }
-                        };
-                        mDatabase.child(Key).addListenerForSingleValueEvent(singlevalue);
-                        reset();
-                        Toast.makeText(getApplicationContext() , "push sucess" , Toast.LENGTH_SHORT).show();
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        pdialog.dismiss();
-                        Toast.makeText(getApplicationContext() , "error" , Toast.LENGTH_SHORT).show();
+                                }
+                            };
+                            mDatabase.child(Key).addListenerForSingleValueEvent(singlevalue);
+                            reset();
+                            Toast.makeText(getApplicationContext(), "push sucess", Toast.LENGTH_SHORT).show();
 
-                    }
-                });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            pdialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
+
+                else if(copressedImg == null && !txtOfnew.getText().toString().trim().equals(""))
+                {
+                    showDialog();
+                    News nn = new News(txtOfnew.getText().toString().trim(), "Default" , uuid, ServerValue.TIMESTAMP);
+                    final String Key = mDatabase.push().getKey();
+                    mDatabase.child(Key).setValue(nn);
+                    hideDialog();
+                    singlevalue = new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Long ss = dataSnapshot.child("mDate").getValue(long.class);
+                            mDatabase.child(Key).child("mDate").setValue(-1 * ss);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    };
+                    mDatabase.child(Key).addListenerForSingleValueEvent(singlevalue);
+                    reset();
+                    Toast.makeText(getApplicationContext(), "push sucess", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(getApplicationContext(), "write anything or chose image", Toast.LENGTH_SHORT).show();
+
             }
+
         });
 
         selectImage.setOnClickListener(new View.OnClickListener() {
@@ -139,10 +168,6 @@ public class Isco_Add_News extends AppCompatActivity {
 //        startActivityForResult(Intent.createChooser(intent, "Select a File to Upload"), var2);
 //    }
 
-    public void nTimestamp(Object object)
-    {
-        object = ServerValue.TIMESTAMP;
-    }
 
 //    @Override
 //    protected void onStop() {
@@ -164,4 +189,17 @@ public class Isco_Add_News extends AppCompatActivity {
         selectImage = (Button) findViewById(R.id.btnnewimg);
         img = (ImageView) findViewById(R.id.newimgpath);
     }
+
+    public void showDialog()
+    {
+        pdialog = new ProgressDialog(Isco_Add_News.this);
+        pdialog.setMessage("uploading");
+        pdialog.show();
+    }
+
+    public void hideDialog()
+    {
+        pdialog.dismiss();
+    }
+
 }

@@ -35,15 +35,23 @@ public class postAdapter extends RecyclerView.ViewHolder {
         }
         public void setay(final Context context, final String image){
             final ImageView new_row_image = (ImageView) mView.findViewById(R.id.new_row_image);
-            Picasso.with(context).load(image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.gray_img).into(new_row_image, new Callback() {
-                @Override
-                public void onSuccess() {
-                }
-                @Override
-                public void onError() {
-                    Picasso.with(context).load(image).placeholder(R.drawable.gray_img).into(new_row_image);
-                }
-            });
+
+            if (image.equals("Default")){
+                new_row_image.setVisibility(View.GONE);
+            }
+            else {
+                new_row_image.setVisibility(View.VISIBLE);
+                Picasso.with(context).load(image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.gray_img).into(new_row_image, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                    }
+
+                    @Override
+                    public void onError() {
+                        Picasso.with(context).load(image).placeholder(R.drawable.gray_img).into(new_row_image);
+                    }
+                });
+            }
         }
 
         public void setImage(final Context context, final String image){
